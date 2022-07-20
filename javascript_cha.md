@@ -60,3 +60,66 @@ name; // => '상진'
 - const : 중복선언이 불가능하며, 값을 재할당 하는 것도 불가능하다. 
 
 ### 실행 컨텍스트와 콜 스택
+- 실행 컨텍스트(Execution Context)는 자바스크립트의 핵심 개념으로, 코드를 실행하기 위해 필요한 환경이다.
+- 더 자세히 말하자면, 실행할 코드에 제공할 환경 정보들을 모아놓은 객체이다.
+```(javascript)
+// 함수 호출 예제. 순서대로 흘러간다.
+// (1)
+
+const a = "hello world!";
+
+const bar = () => { // (5)
+    console.log(a)
+}; // (6)
+
+const foo = ()=>{ // (3)
+	bar() // (4)
+}; // (7)
+
+foo(); // (2)
+
+// (8)
+```
+![images_wonseok2877_post_a6b94e61-7482-408e-976d-43beff496b40_image](https://user-images.githubusercontent.com/85321327/179883152-84208f39-7b41-418a-8b48-2cc2156a6b58.png)
+(1) Global Execution Context 생성.
+
+자바스크립트 파일이 열리는 순간(별도의 명령 없이) 전역 실행 컨텍스트가 생성된다. 그리고 global execution context가 가장 먼저 callstack에 push된다. 지금 callstack의 맨 위에는 global execution이 있으므로 자바스크립트 엔진은 이제 전역 실행 컨텍스트 상에서 코드를 읽어내려가기 시작한다.
+
+(2) foo함수 호출.
+
+foo함수를 호출할 때, Global Execution Context는 멈춘다. 왜냐하면 자바스크립트는 싱글 스레드 환경이기 때문에, 한 번에 하나의 코드만을 실행할 수 있기 때문이다.
+
+(3) 자바스크립트 엔진은 foo함수에 대한 환경 정보를 수집해서 foo execution context를 생성한 후, callstack에 push한다. 이제 함수 내부의 코드들이 순서대로 진행된다.
+
+(4) bar함수 호출. foo함수의 Execution Context는 멈춘다.
+
+(5) bar함수의 Execution Context가 생성되고 callstack에 push된다. 읽어내려간다. console.log함수를 실행한다. 전역 변수인 a의 값이 콘솔창에 뜸으로써 console.log함수의 실행이 끝난다.
+
+(6) 더 읽어내려갈 게 없으므로 bar함수의 Execution Context가 종료된다. callstack에서 pop-out된다. 그리고 해당 함수 바로 밑의 Execution Context, 여기에선 foo함수의 Execution Context가 계속된다.
+
+(7) 더 읽어내려갈 게 없으므로 foo함수의 Execution Context가 끝난다.
+
+(8) 더 읽어내려갈 게 없으므로 Global Execution Context가 끝난다.
+
+### 콜 스택
+- call은 호출, stack은 출입구가 하나뿐인 깊은 우물 같은 데이터 구조를 의미한다.
+- 따라서 callstack은 자바스크립트가 함수 호출을 기록하기 위해 사용하는 우물 형태의 데이터 구조이다.
+- 항상 맨 위에 놓인 함수를 우선으로 실행된다. 이런 식으로 자바스크립트 엔진은 가장 위에 쌓여있는 context와 관련 있는 코드들을 실행하는 식으로 전체 코드의 환경과 순서를 보장한다.
+
+### 스코프 체인(Scope Chain), 변수 은닉화
+- 스코프를 안에서부터 바깥으로 차례로 검색해 나가는 것
+- 여러 스코프에서 동일한 식별자를 선언한 경우에는 무조건 스코프 체인 상에서 가장 먼저 발견된 식별자에만 접근 가능하게 된다.
+- 스코프 체인 내부에서 선언된 변수와 전역변수를 동일한 이름으로 선언해도 서로 접근할 수 없는 경우를 변수 은닉화라고 한다.
+```(javascript)
+var a = 1;
+var outer = function() {
+  var inner = function() {
+    console.log(a); //undefined
+    var a = 3;
+    } 
+    inner();
+    console.log(a); // 1
+  };
+outer();
+console.log(a); // 1
+```
