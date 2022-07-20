@@ -26,23 +26,22 @@ parseInt()
 - `parseFloat()`는 부동 소수점의 숫자로 변환한다. `parseInt()`와는 달리 `parseFloat()`는 항상 10진수를 사용하며 `parseFloat()` 또한 앞부분 빈 공백을 두고 나오는 문자는 모두 무시되어 `NaN`을 반환한다.
 - 다른 자료형-> String Typed으로 변환하는 방법
 - `String(), toString(), toFixed()`
-- `toString()`
 - `toString()`는 인자로 기수를 선택할 수 있다. 인자를 전달하지 않으면 10진수로 변환한다.
-- `toFixed()`
 - `toFixed()`의 인자를 넣으면 인자값만큼 반올림하여 소수점을 표현하며 소수점을 넘치는 값이 인자로 들어오면 ()안의 숫자길이를 맞춘 문자열을 반환한다.
 - 다른자료형 -> `Boolean Type`
 - `Boolean()`
 -------------
-* ==, ===
-* ‘==’ 와 ‘===’ 연산자의 주된 차이점은 ‘==‘는 연산자를 이용하여 서로 다른 유형의 두 변수값이 비교가 가능하지만
-’ ===’는 a === b 라고 할때, 값과 값의 종류(Data Type)가 모두 같은지를 비교해서, 같으면 true, 다르면 false로 표시
-숫자와 불리언 비교
-# :두꺼운_확인_표시: 0값은 false와 동일하므로 -> true 출력
-0 == false // true
-# :두꺼운_확인_표시: 두 피연산자의 유형이 다르기 때문에 ->false
-0 === false // expected output: false
-console.log(typeof 0); 	// expected output: “number”
-console.log(typeof false); // expected output: “boolean”
+- `==, ===`
+- `‘==’` 와 `‘===’` 연산자의 주된 차이점은 `‘==‘`는 연산자를 이용하여 서로 다른 유형의 두 변수값이 비교가 가능하지만 `’===’`는 `a === b` 라고 할때, 값과 값의 종류(Data Type)가 모두 같은지를 비교해서, 같으면 `true`, 다르면 `false`로 표시
+- 숫자와 불리언 비교
+	```
+	# :두꺼운_확인_표시: 0값은 false와 동일하므로 -> true 출력
+	0 == false // true
+	# :두꺼운_확인_표시: 두 피연산자의 유형이 다르기 때문에 ->false
+	0 === false // expected output: false
+	console.log(typeof 0); 	// expected output: “number”
+	console.log(typeof false); // expected output: “boolean”
+	```
 ----------------
 * 느슨한 타입(loosely typed)의 동적(dynamic) 언어의 문제점은 무엇이고 보완할 수 있는 방법에는 무엇이 있을지 생각해보세요
 문제점 : 변수 생성시 원시 변수의 타입을 미리 선언하지 않아도 된다는 장점으로 인해 타입이 올바른지 체크하는것이 굉장히 까다롭기 때문에 배포 시 예상치 못한 문제와 직면 할수 있다
