@@ -7,3 +7,6 @@ function solution(num) {
     }
     return answer;
 }
+
+//반대로 하게 되면 오류가 뜨는데 -1과 같은 숫자때문
+// -1 % 2 = -1
