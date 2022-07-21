@@ -6,3 +6,8 @@ function solution(n) {
     }
     return answer;
 }
+
+// 또 다른 방법
+// function solution(n) {
+//     return String(n).split(‘’).reverse().map(num => num = parseInt(num));
+// }

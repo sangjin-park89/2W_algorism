@@ -1,3 +1,15 @@
+// function solution(s) {
+//     var answer = true
+//   if(s.length === 4||s.length === 6) {
+//      if (isNaN(s) == true){
+//         answer = false;
+//     }else{
+//         answer = true;
+//     }
+//     return answer 
+// } 
+//   } //e를 숫자로 인식해서 통과못함 -> 처리해주자
+
 function solution(s) {
   if(s.length === 4||s.length === 6) {  //문자열 길이가 4~6이니?
       
